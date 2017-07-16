@@ -19,7 +19,7 @@ true % No booleans
 
 % Tuples
 {one, two, three}
-% Tuples are contigous in memory
+% Tuples are contiguously in memory
 {1,2,3,4}
 % We can use access individual items
 element(2, {1,2,3,4}) % => 2
@@ -50,7 +50,7 @@ $a % => 97
 
 % Modules
 -module(demo).
-% Functions must be exported to be used outside module
+% Functions must be exported to be used outside the module
 -export([test/0]).
 % Function here
 
@@ -110,12 +110,14 @@ sum_list([Head|Tail], Acc) -> sum_list(Tail, Acc + Head).
 
 % Process Messaging
 % `Pid` is a process ID
-Pid ! {add, 1, 2}
+Pid ! {add, 1, 2, self()}
 % Receive a message in the process
 receive
-  {add, X, Y} ->
-    add(X, Y)
-    % Send a response back
+  {add, X, Y, Caller} ->
+    % Send the result back
+    Caller ! add(X, Y)
+  _ ->
+    error
 end
 
 
