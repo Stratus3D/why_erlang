@@ -17,7 +17,7 @@ wait(Loops, Message) ->
     {start, FirstLink} ->
       % Start the first loop
       io:format("Sending Message `~p`!~n", [Message]),
-      FirstLink ! Message,
+      FirstLink ! {Message, 0},
       loop(Loops-1, Message, FirstLink)
   end.
 
@@ -27,7 +27,7 @@ loop(0, Message, FirstLink) ->
   io:format("Got Message `~p`!~n", [Message]);
 loop(Loops, Message, FirstLink) ->
   receive
-    Message ->
-      FirstLink ! Message
+    {Message, Num} ->
+      FirstLink ! {Message, Num+1}
   end,
   loop(Loops-1, Message, FirstLink).

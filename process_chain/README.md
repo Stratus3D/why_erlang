@@ -21,11 +21,11 @@ Then start a loop in the iex session:
     > Processes = 100 % Number of processes in chain
     > Loops = 10 % Number of times the message should be sent around the chain
     > Message = test % The messsage to send
-    > process_chain:start(Processes, Loops, Message)
+    > process_chain:start(Processes, Loops, Message).
 
 `start_timed` does the same thing but times how long the looping function takes:
 
-    > process_chain:start_timed(Processes, Loops, Message)
+    > process_chain:start_timed(Processes, Loops, Message).
 
 You should see something like this printed out after you run the start function:
 
