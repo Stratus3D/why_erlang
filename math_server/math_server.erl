@@ -8,7 +8,8 @@
 
 start() ->
   Pid = spawn_link(?MODULE, loop, []),
-  register(?MODULE, Pid).
+  register(?MODULE, Pid),
+  Pid.
 
 add(X, Y) ->
   request({add, X, Y}).
